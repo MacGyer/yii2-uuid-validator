@@ -1,9 +1,9 @@
 {
-    "name": "macgyer/yii2-data-uri-validator",
+    "name": "macgyer/yii2-uuid-validator",
     "minimum-stability": "stable",
-    "description": "Data URI validator for Yii2",
-    "keywords": ["validator", "yii2", "data uri", "data url"],
-    "homepage": "https://github.com/MacGyer/yii2-data-uri-validator",
+    "description": "UUID validator for Yii2",
+    "keywords": ["validator", "yii2", "uuid", "universally unique identifier"],
+    "homepage": "https://github.com/MacGyer/yii2-uuid-validator",
     "type": "yii2-extension",
     "license": "MIT",
     "authors": [
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "macgyer\\yii2dataurivalidator\\": "src"
+            "macgyer\\yii2uuidvalidator\\": "src"
         }
     }
 }

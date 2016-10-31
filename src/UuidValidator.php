@@ -1,26 +1,34 @@
 <?php
 /**
- * @link https://github.com/MacGyer/yii2-cropit
+ * @link https://github.com/MacGyer/yii2-uuid-validator
  * @copyright Copyright (c) 2016 ... MacGyer for pluspunkt coding
- * @license https://github.com/MacGyer/yii2-cropit/blob/master/LICENSE
+ * @license https://github.com/MacGyer/yii2-uuid-validator/blob/master/LICENSE
  */
 
-namespace macgyer\yii2dataurivalidator;
+namespace macgyer\yii2uuidvalidator;
 
 use yii\validators\Validator;
 use Yii;
 
 /**
- * DataUriValidator validates that the attribute value is a valid data uri.
+ * UuidValidator validates that the attribute value is a valid UUID.
  *
- * @package yii2cropit
+ * @package yii2uuidvalidator
+ * @see https://en.wikipedia.org/wiki/Universally_unique_identifier
+ * @see https://github.com/ramsey/uuid
  */
-class DataUriValidator extends Validator
+class UuidValidator extends Validator
 {
     /**
      * @var string the pattern to test against the value.
      */
-    private $pattern = "/data:(.*?)(?:;charset=(.*?))?(;base64)?,(.+)/i";
+    private $pattern = "/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i";
+
+    /**
+     * @var string
+     * @see http://tools.ietf.org/html/rfc4122#section-4.1.7
+     */
+    private $zero = '00000000-0000-0000-0000-000000000000';
 
     /**
      * Initializes the validator.
@@ -58,7 +66,13 @@ class DataUriValidator extends Validator
      */
     protected function validateValue($value)
     {
-        if (preg_match($this->pattern, $value)) {
+        $uuid = str_replace(['urn:', 'uuid:', '{', '}'], '', $value);
+
+        if ($uuid == $this->zero) {
+            return null;
+        }
+
+        if (preg_match($this->pattern, $uuid)) {
             return null;
         }
 
