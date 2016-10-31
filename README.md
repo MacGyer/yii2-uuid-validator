@@ -1,5 +1,7 @@
-# yii2-data-uri-validator
-Data URI validator for Yii2 framework
+# yii2-uuid-validator
+UUID validator for Yii2 framework
+
+This validator was strongly by https://github.com/ramsey/uuid. Thank @ramsey for your great UUID package.
 
 ## Installation
 
@@ -9,7 +11,7 @@ If you don't have Composer you can get it here: https://getcomposer.org/
 To install the package add the following to the ```require``` section of your composer.json:
 ```
 "require": {
-    "macgyer/yii2-data-uri-validator": "*"
+    "macgyer/yii2-uuid-validator": "*"
 },
 ```
 
@@ -22,7 +24,7 @@ public function rules()
 {
   return [
       // more rules
-      ['some_property', \macgyer\yii2dataurivalidator\DataUriValidator::className()],
+      ['some_property', \macgyer\yii2uuidvalidator\UuidValidator::className()],
   ];
 }
 ```
