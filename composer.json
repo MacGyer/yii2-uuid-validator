@@ -3,7 +3,7 @@
     "minimum-stability": "stable",
     "description": "UUID validator for Yii2",
     "keywords": ["validator", "yii2", "uuid", "universally unique identifier"],
-    "homepage": "https://github.com/MacGyeryii2-uuid-validator",
+    "homepage": "https://github.com/MacGyer/yii2-uuid-validator",
     "type": "yii2-extension",
     "license": "MIT",
     "authors": [
