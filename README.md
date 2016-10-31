@@ -1,7 +1,7 @@
 # yii2-uuid-validator
 UUID validator for Yii2 framework
 
-This validator was strongly by https://github.com/ramsey/uuid. Thanks @ramsey for your great UUID package.
+This validator was strongly influenced by https://github.com/ramsey/uuid. Thanks @ramsey for your great UUID package.
 
 ## Installation
 
