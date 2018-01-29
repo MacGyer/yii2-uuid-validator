@@ -38,7 +38,7 @@ class UuidValidator extends Validator
         parent::init();
 
         if ($this->message === null) {
-            $this->message = Yii::t('yii', '{attribute} is not a valid data URI.');
+            $this->message = Yii::t('yii', '{attribute} is not a valid UUID.');
         }
     }
 
