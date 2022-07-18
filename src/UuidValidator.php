@@ -9,6 +9,8 @@ namespace macgyer\yii2uuidvalidator;
 
 use yii\validators\Validator;
 use Yii;
+use yii\helpers\Json;
+use yii\web\JsExpression;
 
 /**
  * UuidValidator validates that the attribute value is a valid UUID.
@@ -92,8 +94,19 @@ class UuidValidator extends Validator
      */
     public function clientValidateAttribute($model, $attribute, $view)
     {
-        $message = json_encode($this->renderMessage($model, $attribute), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        $js = "if (!{$this->pattern}.test(value)) {messages.push({$message});}";
+        $options = Json::htmlEncode($this->getClientOptions($model, $attribute));
+        $js = <<<JS
+            let isEmpty = function (value) {
+                return value === null || value === undefined || value === '';
+            };
+            let options = $options;
+            if (options.skipOnEmpty && isEmpty(value)) {
+                return;
+            }
+            if (!options.pattern.test(value)) {
+                messages.push(options.message);
+            }
+        JS;
         return $js;
     }
 
@@ -109,5 +122,20 @@ class UuidValidator extends Validator
         $message = strtr($this->message, ['{attribute}' => $attributeLabel]);
 
         return $message;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClientOptions($model, $attribute)
+    {
+        $options = [
+            'pattern' => new JsExpression($this->pattern),
+            'message' => $this->renderMessage($model, $attribute)
+        ];
+        if ($this->skipOnEmpty) {
+            $options['skipOnEmpty'] = 1;
+        }
+        return $options;
     }
 }
